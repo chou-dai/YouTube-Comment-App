@@ -1,4 +1,9 @@
-# youtube-trend-app
+# YouTube Coments Visualization App
+
+
+### 概要
+YouTubeの急上昇動画のコメントを形態素解析して割合を出力するアプリケーション
+
 
 ### 技術スタック
 * フロントエンド : React(Typescript)
