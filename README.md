@@ -1,4 +1,4 @@
-# YouTube Coments Visualization App
+# YouTube Comments Visualization App
 
 
 ### 概要
