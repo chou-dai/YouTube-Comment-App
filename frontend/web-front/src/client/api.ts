@@ -14,7 +14,7 @@
 
 
 import { Configuration } from './configuration';
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from "axios";
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
@@ -33,6 +33,12 @@ export interface VideoData {
      * @memberof VideoData
      */
     'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VideoData
+     */
+    'title': string;
     /**
      * 
      * @type {string}
@@ -57,19 +63,6 @@ export interface VideoData {
      * @memberof VideoData
      */
     'thumbnail_url': string;
-}
-/**
- * 
- * @export
- * @interface VideoDataList
- */
-export interface VideoDataList {
-    /**
-     * 
-     * @type {Array<VideoData>}
-     * @memberof VideoDataList
-     */
-    'videoDataList'?: Array<VideoData>;
 }
 
 /**
@@ -129,7 +122,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVideoDataList(createdAt: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VideoDataList>> {
+        async getVideoDataList(createdAt: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<VideoData>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getVideoDataList(createdAt, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -150,7 +143,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVideoDataList(createdAt: string, options?: any): AxiosPromise<VideoDataList> {
+        getVideoDataList(createdAt: string, options?: any): AxiosPromise<Array<VideoData>> {
             return localVarFp.getVideoDataList(createdAt, options).then((request) => request(axios, basePath));
         },
     };
