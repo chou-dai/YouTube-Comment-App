@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Youtube_Trend
+from .models import CommentData, VideoData
 
 
-admin.site.register(Youtube_Trend)
+admin.site.register(VideoData)
+admin.site.register(CommentData)

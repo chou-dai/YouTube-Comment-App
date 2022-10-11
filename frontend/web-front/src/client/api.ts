@@ -24,27 +24,52 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
- * @interface RetrieveYoutubeTrend200Response
+ * @interface VideoData
  */
-export interface RetrieveYoutubeTrend200Response {
-    /**
-     * 
-     * @type {number}
-     * @memberof RetrieveYoutubeTrend200Response
-     */
-    'id'?: number;
+export interface VideoData {
     /**
      * 
      * @type {string}
-     * @memberof RetrieveYoutubeTrend200Response
+     * @memberof VideoData
      */
-    'title': string;
+    'id': string;
     /**
      * 
      * @type {string}
-     * @memberof RetrieveYoutubeTrend200Response
+     * @memberof VideoData
      */
-    'body': string;
+    'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof VideoData
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VideoData
+     */
+    'channel_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VideoData
+     */
+    'thumbnail_url': string;
+}
+/**
+ * 
+ * @export
+ * @interface VideoDataList
+ */
+export interface VideoDataList {
+    /**
+     * 
+     * @type {Array<VideoData>}
+     * @memberof VideoDataList
+     */
+    'videoDataList'?: Array<VideoData>;
 }
 
 /**
@@ -55,44 +80,16 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
+         * @summary getVideoDataList
+         * @param {string} createdAt 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listYoutubeTrends: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id A unique integer value identifying this youtube_ trend.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        retrieveYoutubeTrend: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('retrieveYoutubeTrend', 'id', id)
-            const localVarPath = `/api/{id}/`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+        getVideoDataList: async (createdAt: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createdAt' is not null or undefined
+            assertParamExists('getVideoDataList', 'createdAt', createdAt)
+            const localVarPath = `/api/video/{created_at}/`
+                .replace(`{${"created_at"}}`, encodeURIComponent(String(createdAt)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -127,21 +124,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary getVideoDataList
+         * @param {string} createdAt 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listYoutubeTrends(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RetrieveYoutubeTrend200Response>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listYoutubeTrends(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {string} id A unique integer value identifying this youtube_ trend.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async retrieveYoutubeTrend(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RetrieveYoutubeTrend200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.retrieveYoutubeTrend(id, options);
+        async getVideoDataList(createdAt: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VideoDataList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getVideoDataList(createdAt, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -156,20 +145,13 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
+         * @summary getVideoDataList
+         * @param {string} createdAt 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listYoutubeTrends(options?: any): AxiosPromise<Array<RetrieveYoutubeTrend200Response>> {
-            return localVarFp.listYoutubeTrends(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id A unique integer value identifying this youtube_ trend.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        retrieveYoutubeTrend(id: string, options?: any): AxiosPromise<RetrieveYoutubeTrend200Response> {
-            return localVarFp.retrieveYoutubeTrend(id, options).then((request) => request(axios, basePath));
+        getVideoDataList(createdAt: string, options?: any): AxiosPromise<VideoDataList> {
+            return localVarFp.getVideoDataList(createdAt, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -183,23 +165,14 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 export class DefaultApi extends BaseAPI {
     /**
      * 
+     * @summary getVideoDataList
+     * @param {string} createdAt 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listYoutubeTrends(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).listYoutubeTrends(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} id A unique integer value identifying this youtube_ trend.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public retrieveYoutubeTrend(id: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).retrieveYoutubeTrend(id, options).then((request) => request(this.axios, this.basePath));
+    public getVideoDataList(createdAt: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getVideoDataList(createdAt, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

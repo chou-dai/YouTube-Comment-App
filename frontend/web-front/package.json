@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "codegen": "openapi-generator-cli generate -g typescript-axios -i ../../backend/web-back/swagger.yml -o ./src/client/"
+    "codegen": "openapi-generator-cli generate -g typescript-axios -i ../../backend/web-back/swagger.json -o ./src/client/"
   },
   "eslintConfig": {
     "extends": [

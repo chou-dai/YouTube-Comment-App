@@ -1,8 +1,15 @@
 from rest_framework import serializers
-from .models import Youtube_Trend
+from .models import CommentData, VideoData
 
 
-class YoutubeTrendSerializer(serializers.ModelSerializer):
+class CommentDataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Youtube_Trend
-        fields = ('id', 'title', 'body')
+        model = CommentData
+        fields = ('video_id', 'comment')
+
+
+class VideoDataSerializer(serializers.ModelSerializer):
+    comments = CommentDataSerializer(many=True)
+    class Meta:
+        model = VideoData
+        fields = ('id', 'description', 'created_at', 'channel_name', 'thumbnail_url', 'comments')
