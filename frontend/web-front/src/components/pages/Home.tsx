@@ -2,6 +2,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreType } from "../../redux/store";
 import { fetchVideoDataByCreatedAt, getVideoDataList } from "../../redux/videoDataResponse";
+import { parseDate } from "../../utils/timeUtil";
 
 const Home: FC = () => {
     const dispatch = useDispatch();
@@ -9,8 +10,11 @@ const Home: FC = () => {
     const videoDataList = getVideoDataList(selector);
 
     useEffect(() => {
-        dispatch(fetchVideoDataByCreatedAt("2022-10-10"));
-    },[]);
+        const today = parseDate(new Date());
+        dispatch(fetchVideoDataByCreatedAt(today));
+    }, []);
+
+    
     return (
         <div className="flex flex-col items-center">
             {videoDataList.map(videoData => {
