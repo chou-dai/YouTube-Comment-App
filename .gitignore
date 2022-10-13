@@ -1,8 +1,8 @@
 .env
 mysql_volume/*
 
-node_modules/.cache/
-
+.cache/
+default.dev.conf
 
 settings.py
 local_settings.py

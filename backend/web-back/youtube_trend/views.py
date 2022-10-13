@@ -8,7 +8,7 @@ class VideoDataAPIView(APIView):
     def get(self, *args, **kwargs):
         created_at = kwargs.get('created_at')
         try:
-            queryset = VideoData.objects.filter(created_at=created_at)
+            queryset = VideoData.objects.filter(created_at=created_at).order_by("rank")
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         serializer_class = VideoDataSerializer(queryset, many=True)

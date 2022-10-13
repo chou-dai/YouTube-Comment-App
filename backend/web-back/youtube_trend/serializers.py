@@ -12,4 +12,4 @@ class VideoDataSerializer(serializers.ModelSerializer):
     comments = CommentDataSerializer(many=True)
     class Meta:
         model = VideoData
-        fields = ('id', 'description', 'created_at', 'channel_name', 'title', 'thumbnail_url', 'comments')
+        fields = ('id', 'rank', 'description', 'created_at', 'channel_name', 'title', 'thumbnail_url', 'comments')

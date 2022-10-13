@@ -1,8 +1,8 @@
-from enum import unique
 from django.db import models
 
 class VideoData(models.Model):
     id = models.CharField(primary_key=True, max_length=50, unique=True)
+    rank = models.IntegerField()
     title = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     created_at = models.DateField()

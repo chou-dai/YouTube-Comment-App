@@ -21,10 +21,11 @@ const Home: FC = () => {
                 return (
                     <div key={videoData.id}>
                         <div>{videoData.title}</div>
-                        <div>{videoData.description}</div>
                         <div>{videoData.channel_name}</div>
                         <img src={videoData.thumbnail_url}/>
+                        <div style={{whiteSpace: "pre-line"}}>{videoData.description}</div>
                         <a href={`https://www.youtube.com/watch?v=${videoData.id}`}>YouTubeリンク</a>
+                        <br></br>
                     </div>
                 );
             })}

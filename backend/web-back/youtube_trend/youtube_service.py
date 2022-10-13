@@ -4,7 +4,6 @@ from .classes.VideoDataClass import YoutubeVideoData
 from .models import VideoData
 from django.utils import timezone
 from django.utils.timezone import localtime
-import datetime
 
 # main関数
 def youtube_api_service():
@@ -20,9 +19,10 @@ def insert_database(video_data_list: list[YoutubeVideoData]):
     query_list = []
     now = localtime(timezone.now())
     now.strftime('%Y-%m-%d')
-    for item in video_data_list:
+    for i, item in  enumerate(video_data_list):
         query = VideoData(
             id = item.id,
+            rank = i+1,
             title = item.title,
             description = item.description,
             created_at = now,
@@ -66,5 +66,5 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
 # 定期実行
 def start():
     scheduler = BackgroundScheduler()
-    # scheduler.add_job(youtube_api_service, 'cron', minute=6)
+    scheduler.add_job(youtube_api_service, 'cron', minute=43)
     scheduler.start()

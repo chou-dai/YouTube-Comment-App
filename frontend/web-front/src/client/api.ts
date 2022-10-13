@@ -14,7 +14,7 @@
 
 
 import { Configuration } from './configuration';
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from "axios";
+import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
@@ -81,7 +81,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         getVideoDataList: async (createdAt: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'createdAt' is not null or undefined
             assertParamExists('getVideoDataList', 'createdAt', createdAt)
-            const localVarPath = `/api/video/{created_at}/`
+            const localVarPath = `/api/v1/video/{created_at}/`
                 .replace(`{${"created_at"}}`, encodeURIComponent(String(createdAt)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
