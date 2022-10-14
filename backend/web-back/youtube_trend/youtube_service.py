@@ -1,45 +1,52 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from .apiClient.YoutubeClient import YoutubeApiClient
 from .classes.VideoDataClass import YoutubeVideoData
-from .models import VideoData
+from .models import DailyRankData, VideoData
 from django.utils import timezone
 from django.utils.timezone import localtime
+
+
+"""
+==== 処理の流れ ====
+1. youtubeAPI fetch
+2. response List[YoutubeVideoData] cast
+3. insert database
+"""
 
 # main関数
 def youtube_api_service():
     youtube_client = YoutubeApiClient()
     # 急上昇取得
     response = youtube_client.fetch_youtube_trend()
+    # YoutubeVideoDataのListに変換
     video_data_list = to_video_data_list(response)
     insert_database(video_data_list)
 
 
-# DBにinsert
+# データベースにinsert
 def insert_database(video_data_list: list[YoutubeVideoData]):
-    query_list = []
     now = localtime(timezone.now())
     now.strftime('%Y-%m-%d')
-    for i, item in  enumerate(video_data_list):
-        print(now)
-        query = VideoData(
-            id = item.id,
-            rank = i+1,
-            title = item.title,
-            description = item.description,
-            created_at = now,
-            channel_name = item.channel_title,
-            thumbnail_url = item.thumbnail_url
-        )
-        query_list.append(query)
-    try:
-        VideoData.objects.bulk_create(query_list)
-        print("================")
-        print(" Insert Success")
-        print("================")
-    except:
-        print("================")
-        print(" Insert Error")
-        print("================")
+    for i, item in enumerate(video_data_list):
+        try:
+            # insert video table
+            video, created = VideoData.objects.get_or_create(
+                id = item.id,
+                title = item.title,
+                description = item.description,
+                channel_name = item.channel_title,
+                thumbnail_url = item.thumbnail_url
+            )
+            # insert daily_rank table
+            DailyRankData.objects.create(
+                date = now,
+                rank = i+1,
+                video = video
+            )
+            print("Insert {} Success".format(item.title))
+        except:
+            print("Insert {} Error".format(item.title))
+
 
 
 # VideoDataクラスのリストにキャスト
@@ -67,5 +74,5 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
 # 定期実行
 def start():
     scheduler = BackgroundScheduler()
-    # scheduler.add_job(youtube_api_service, 'cron', minute=19)
+    # scheduler.add_job(youtube_api_service, 'cron', minute=1)
     scheduler.start()
