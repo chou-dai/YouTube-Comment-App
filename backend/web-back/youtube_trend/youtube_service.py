@@ -20,6 +20,7 @@ def insert_database(video_data_list: list[YoutubeVideoData]):
     now = localtime(timezone.now())
     now.strftime('%Y-%m-%d')
     for i, item in  enumerate(video_data_list):
+        print(now)
         query = VideoData(
             id = item.id,
             rank = i+1,
@@ -66,5 +67,5 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
 # 定期実行
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(youtube_api_service, 'cron', minute=43)
+    # scheduler.add_job(youtube_api_service, 'cron', minute=19)
     scheduler.start()

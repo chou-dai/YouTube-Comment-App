@@ -19,7 +19,7 @@ const Home: FC = () => {
         <div className="flex flex-col items-center">
             {videoDataList.map(videoData => {
                 return (
-                    <div key={videoData.id} className="mb-10 bg-purple-600">
+                    <div key={videoData.id} className="mb-10 bg-purple-100">
                         <div>{videoData.title}</div>
                         <div>{videoData.channel_name}</div>
                         <img src={videoData.thumbnail_url}/>

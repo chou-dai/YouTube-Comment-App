@@ -3,5 +3,5 @@ from .views import VideoDataAPIView
 
 
 urlpatterns = [
-    path('video/<str:created_at>/', VideoDataAPIView.as_view())
+    path('video/<str:date>/', VideoDataAPIView.as_view())
 ]
