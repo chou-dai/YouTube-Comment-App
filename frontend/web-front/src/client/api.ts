@@ -24,6 +24,37 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface RankVideoData
+ */
+export interface RankVideoData {
+    /**
+     * 
+     * @type {string}
+     * @memberof RankVideoData
+     */
+    'date': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof RankVideoData
+     */
+    'rank': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof RankVideoData
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {VideoData}
+     * @memberof RankVideoData
+     */
+    'video': VideoData;
+}
+/**
+ * 
+ * @export
  * @interface VideoData
  */
 export interface VideoData {
@@ -50,12 +81,6 @@ export interface VideoData {
      * @type {string}
      * @memberof VideoData
      */
-    'created_at': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof VideoData
-     */
     'channel_name': string;
     /**
      * 
@@ -73,16 +98,16 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
-         * @summary getVideoDataList
-         * @param {string} createdAt 
+         * @summary getDailyRankVideoDataList
+         * @param {string} date 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVideoDataList: async (createdAt: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createdAt' is not null or undefined
-            assertParamExists('getVideoDataList', 'createdAt', createdAt)
-            const localVarPath = `/api/v1/video/{created_at}/`
-                .replace(`{${"created_at"}}`, encodeURIComponent(String(createdAt)));
+        getDailyRankVideoDataList: async (date: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'date' is not null or undefined
+            assertParamExists('getDailyRankVideoDataList', 'date', date)
+            const localVarPath = `/api/v1/video/{date}/`
+                .replace(`{${"date"}}`, encodeURIComponent(String(date)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -117,13 +142,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary getVideoDataList
-         * @param {string} createdAt 
+         * @summary getDailyRankVideoDataList
+         * @param {string} date 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVideoDataList(createdAt: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<VideoData>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getVideoDataList(createdAt, options);
+        async getDailyRankVideoDataList(date: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RankVideoData>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDailyRankVideoDataList(date, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -138,13 +163,13 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @summary getVideoDataList
-         * @param {string} createdAt 
+         * @summary getDailyRankVideoDataList
+         * @param {string} date 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVideoDataList(createdAt: string, options?: any): AxiosPromise<Array<VideoData>> {
-            return localVarFp.getVideoDataList(createdAt, options).then((request) => request(axios, basePath));
+        getDailyRankVideoDataList(date: string, options?: any): AxiosPromise<Array<RankVideoData>> {
+            return localVarFp.getDailyRankVideoDataList(date, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -158,14 +183,14 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 export class DefaultApi extends BaseAPI {
     /**
      * 
-     * @summary getVideoDataList
-     * @param {string} createdAt 
+     * @summary getDailyRankVideoDataList
+     * @param {string} date 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public getVideoDataList(createdAt: string, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).getVideoDataList(createdAt, options).then((request) => request(this.axios, this.basePath));
+    public getDailyRankVideoDataList(date: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).getDailyRankVideoDataList(date, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -21,15 +21,15 @@ class DailyRankData(models.Model):
     date = models.DateField()
     created_at = models.DateTimeField(auto_now=True)
     rank = models.IntegerField(default=0)
-    video_id = models.ForeignKey(VideoData, related_name="video", on_delete=models.CASCADE)
+    video = models.ForeignKey(VideoData, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'daily_rank'
 
     def __str__(self):
-        return self.date
-
+        return str(self.date)
  
+
 # コメントデータ
 class CommentData(models.Model):
     video_id = models.ForeignKey(VideoData, related_name="comments", on_delete=models.CASCADE)

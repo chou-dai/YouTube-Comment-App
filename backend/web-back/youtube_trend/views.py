@@ -8,7 +8,7 @@ class VideoDataAPIView(APIView):
     def get(self, *args, **kwargs):
         date = kwargs.get('date')
         try:
-            queryset = DailyRankData.objects.filter(date=date).order_by("rank")
+            queryset = DailyRankData.objects.select_related("video").filter(date=date).order_by("rank")
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         serializer_class = DailyRankDataSerializer(queryset, many=True)

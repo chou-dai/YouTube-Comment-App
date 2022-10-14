@@ -1,5 +1,5 @@
-import { VideoData } from "../../client";
+import { RankVideoData } from "../../client";
 
 export interface StoreType {
-    videoDataList: VideoData[];
+    videoDataList: RankVideoData[];
 } 

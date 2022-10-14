@@ -1,7 +1,7 @@
 import { createStore as reduxCreateStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { createLogger } from "redux-logger";
-import { VideoListReducer } from "../videoDataResponse";
+import { RankVideoListReducer } from "../videoDataResponse";
 
 const createStore = () => {
     const logger = createLogger({
@@ -11,7 +11,7 @@ const createStore = () => {
 
     return reduxCreateStore(
         combineReducers({
-            videoDataList: VideoListReducer
+            videoDataList: RankVideoListReducer
         }),
 
         applyMiddleware(

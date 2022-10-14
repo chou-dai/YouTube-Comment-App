@@ -3,7 +3,7 @@ import { StoreType } from "../store";
 
 const videoListSelector = (state: StoreType) => state.videoDataList;
 
-export const getVideoDataList = createSelector (
+export const getRankVideoDataList = createSelector (
     [videoListSelector],
     state => state
 );
