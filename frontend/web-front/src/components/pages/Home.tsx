@@ -20,14 +20,17 @@ const Home: FC = () => {
             {rankVideoDataList.map(rankVideoData => {
                 const videoData = rankVideoData.video;
                 return (
-                    <div key={videoData.id} className="mb-10 bg-purple-100">
+                    <div key={videoData.id} className="mb-10 bg-purple-100 flex flex-col items-center">
                         <div>{rankVideoData.rank}</div>
                         <div>{rankVideoData.date}</div>
                         <div>{videoData.title}</div>
                         <div>{videoData.channel_name}</div>
                         <img src={videoData.thumbnail_url}/>
+                        <iframe
+                            width="560" height="315"
+                            src={`https://www.youtube.com/embed/${videoData.id}?rel=0`}
+                        ></iframe>
                         <div style={{whiteSpace: "pre-line"}}>{videoData.description}</div>
-                        <a href={`https://www.youtube.com/watch?v=${videoData.id}`}>YouTubeリンク</a>
                     </div>
                 );
             })}
