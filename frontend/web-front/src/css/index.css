@@ -51,3 +51,9 @@ table {
   height: 100%;
   top: 100%;
 }
+
+
+/* カスタムStyle */
+.rank_item:hover .backdrop {
+	opacity: 0.15;
+}
