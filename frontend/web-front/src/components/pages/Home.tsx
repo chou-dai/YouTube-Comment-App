@@ -30,7 +30,7 @@ const Home: FC = () => {
                             width="560" height="315"
                             src={`https://www.youtube.com/embed/${videoData.id}?rel=0`}
                         ></iframe>
-                        <div style={{whiteSpace: "pre-line"}}>{videoData.description}</div>
+                        {/* <div style={{whiteSpace: "pre-line"}}>{videoData.description}</div> */}
                     </div>
                 );
             })}
