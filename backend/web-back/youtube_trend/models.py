@@ -4,8 +4,7 @@ from django.db import models
 # 動画データ
 class VideoData(models.Model):
     id = models.CharField(primary_key=True, max_length=50, unique=True)
-    title = models.CharField(max_length=100)
-    description = models.TextField(null=True, blank=True)
+    title = models.TextField(max_length=100)
     channel_name = models.CharField(max_length=100)
     thumbnail_url = models.URLField()
 
@@ -24,6 +23,12 @@ class DailyRankData(models.Model):
     video = models.ForeignKey(VideoData, on_delete=models.CASCADE)
 
     class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["date", "rank"],
+                name="date_rank_unique"
+            ),
+        ]
         db_table = 'daily_rank'
 
     def __str__(self):

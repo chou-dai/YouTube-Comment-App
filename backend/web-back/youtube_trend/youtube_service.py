@@ -33,7 +33,6 @@ def insert_database(video_data_list: list[YoutubeVideoData]):
             video, created = VideoData.objects.get_or_create(
                 id = item.id,
                 title = item.title,
-                description = item.description,
                 channel_name = item.channel_title,
                 thumbnail_url = item.thumbnail_url
             )
@@ -44,9 +43,10 @@ def insert_database(video_data_list: list[YoutubeVideoData]):
                 video = video
             )
             print("Insert {} Success".format(item.title))
-        except:
+        except Exception as e:
             print("Insert {} Error".format(item.title))
-
+            print("type:" + str(type(e)))
+            print("message:" + str(e))
 
 
 # VideoDataクラスのリストにキャスト
@@ -59,14 +59,12 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
         id = item['id']
         # title
         title = snippet['title']
-        # description
-        description = snippet['description']
         # image_url
         thumbnail_url = snippet['thumbnails']['high']['url']
         # channel_title
         channel_title = snippet['channelTitle']
         # VideoDataClass生成
-        video_data = YoutubeVideoData(id, title, description, thumbnail_url, channel_title)
+        video_data = YoutubeVideoData(id, title, thumbnail_url, channel_title)
         video_data_list.append(video_data)
     return video_data_list
 
@@ -74,5 +72,5 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
 # 定期実行
 def start():
     scheduler = BackgroundScheduler()
-    # scheduler.add_job(youtube_api_service, 'cron', minute=41)
+    scheduler.add_job(youtube_api_service, 'cron', minute=18)
     scheduler.start()

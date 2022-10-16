@@ -34,11 +34,13 @@ const Home: FC = () => {
     
     return (
         <div className="flex flex-col items-center">
+            running this app
+            {rankVideoDataList.length !== 0 &&
             <RankList
                 items={rankVideoDataList}
                 handleOpenModal={handleOpenModal}
-            />
-            {modalItem !== undefined &&
+            />}
+            {modalItem &&
             <VideoItemModal
                 isOpened={isOpenedModal}
                 item={modalItem}
