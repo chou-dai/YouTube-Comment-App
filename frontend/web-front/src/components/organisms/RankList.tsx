@@ -12,11 +12,11 @@ const RankList: FC<Props> = memo(function rankList(props: Props) {
     const {items, handleOpenModal} = props;
 
     return (
-        <div>
+        <div className="w-[1920px]">
             <span>
                 {convertDateToDisplayString(new Date(items[0].created_at), "yyyy/MM/dd HH:mm:ss 更新")}
             </span>
-            <div className="flex flex-wrap w-full">
+            <div className="flex flex-wrap">
                 {items.map((item) => (
                     <RankListItem
                         key={item.video.id}
