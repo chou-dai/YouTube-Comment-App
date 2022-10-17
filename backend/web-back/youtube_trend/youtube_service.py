@@ -22,7 +22,7 @@ def youtube_api_service():
     response = youtube_client.fetch_youtube_trend()
     # YoutubeVideoDataのListに変換
     video_data_list = to_video_data_list(response)
-    # insert_database(video_data_list)
+    insert_database(video_data_list)
 
 
 # データベースにinsert
@@ -34,9 +34,11 @@ def insert_database(video_data_list: list[YoutubeVideoData]):
             # insert video table
             video, created = VideoData.objects.get_or_create(
                 id = item.id,
-                title = item.title,
-                channel_name = item.channel_title,
-                thumbnail_url = item.thumbnail_url
+                defaults={
+                    'title' : item.title,
+                    'channel_name' : item.channel_title,
+                    'thumbnail_url' : item.thumbnail_url
+                }
             )
             # insert daily_rank table
             DailyRankData.objects.create(
@@ -61,12 +63,12 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
         id = item['id']
         # title
         title = snippet['title']
-        tagger = MeCab.Tagger('-r /usr/lib/mecab/')
-        try:
-            parsed_txt = tagger.parse(title)
-            print(parsed_txt)
-        except:
-            print("error")
+        # tagger = MeCab.Tagger('-r /usr/lib/mecab/')
+        # try:
+        #     parsed_txt = tagger.parse(title)
+        #     print(parsed_txt)
+        # except:
+        #     print("error")
         # image_url
         thumbnail_url = snippet['thumbnails']['high']['url']
         # channel_title
@@ -80,5 +82,5 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
 # 定期実行
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(youtube_api_service, 'cron', minute=41)
+    scheduler.add_job(youtube_api_service, 'cron', hour=0, minute=24)
     scheduler.start()
