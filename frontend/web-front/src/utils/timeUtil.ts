@@ -1,10 +1,16 @@
 import {format} from "date-fns";
 import {ja} from "date-fns/locale";
 
-export function parseDate(date: Date) {
+export const parseDate = (date: Date) => {
     return format(date, "yyyy-MM-dd");
-}
+};
 
-export function convertDateToDisplayString(date: Date, strFormat: string) {
+export const convertDateToDisplayString = (date: Date, strFormat: string) => {
     return format(date, strFormat, {locale: ja});
-}
+};
+
+export const calcDate = (date: Date, count:number) => {
+    const returnDate = new Date(date);
+    returnDate.setDate(returnDate.getDate() + count);
+    return returnDate;
+};

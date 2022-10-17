@@ -1,18 +1,23 @@
+import { Button, IconButton } from "@material-ui/core";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RankVideoData } from "../../client";
+import { useSelectDate } from "../../hooks";
 import { StoreType } from "../../redux/store";
 import { fetchRankVideoDataByDate, getRankVideoDataList } from "../../redux/videoDataResponse";
 import { convertDateToDisplayString, parseDate } from "../../utils/timeUtil";
 import { VideoItemModal } from "../molecules";
 import { RankList } from "../organisms";
+import { BsCalendarCheck, BsCalendarWeek, BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { BaseIconButton } from "../atoms";
 
 const Home: FC = () => {
     const dispatch = useDispatch();
     const selector = useSelector((state: StoreType) => state);
     const rankVideoDataList = getRankVideoDataList(selector);
 
-    const [date, setDate] = useState(new Date());
+    const {date, setNextDay, setToday, setPreviousDay} = useSelectDate();
+
     const [modalItem, setModalItem] = useState(undefined as RankVideoData|undefined);
     const [isOpenedModal, setIsOpenedModal] = useState(false);
 
@@ -32,10 +37,30 @@ const Home: FC = () => {
     
     return (
         <div className="flex flex-col items-center">
-            running this app
-            <h1>
-                {convertDateToDisplayString(date, "yyyy年MM月dd日E曜日")} YouTube急上昇
-            </h1>
+            <h1 className="my-5 text-xl">Title</h1>
+            <div className="flex items-center">
+                <BaseIconButton
+                    icon={<BsCalendarCheck/>}
+                    text="今日"
+                    handleClick={setToday}
+                />
+                <BaseIconButton
+                    icon={<BsChevronLeft/>}
+                    text="前日"
+                    handleClick={()=>setPreviousDay(date)}
+                />
+                <span>{convertDateToDisplayString(date, "yyyy年MM月dd日E曜日")}</span>
+                <BaseIconButton
+                    icon={<BsChevronRight/>}
+                    text="翌日"
+                    handleClick={() => setNextDay(date)}
+                />
+                <BaseIconButton
+                    icon={<BsCalendarWeek/>}
+                    text="カレンダー"
+                    handleClick={setToday}
+                />
+            </div>
             {rankVideoDataList.length !== 0 &&
             <RankList
                 items={rankVideoDataList}
