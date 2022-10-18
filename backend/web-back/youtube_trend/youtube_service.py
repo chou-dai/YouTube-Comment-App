@@ -82,5 +82,5 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
 # 定期実行
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(youtube_api_service, 'cron', hour=0, minute=24)
+    scheduler.add_job(youtube_api_service, 'cron', hour=0, minute=0)
     scheduler.start()

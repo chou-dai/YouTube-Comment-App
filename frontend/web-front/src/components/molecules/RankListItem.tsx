@@ -11,10 +11,10 @@ const RankListItem: FC<Props> = memo(function rankListItem(props: Props) {
     const {item, handleOpenModal} = props;
 
     return (
-        <div>
+        <div className="xl:w-1/4 md:w-1/3 w-full aspect-video">
             <ButtonBase
                 focusRipple
-                className="rank_item w-[480px] h-[268px]"
+                className="rank_item w-full h-full"
                 onClick={() => handleOpenModal(item)}
             >
                 <img className="absolute object-cover w-full h-full"

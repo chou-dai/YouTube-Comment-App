@@ -40,24 +40,24 @@ const Home: FC = () => {
             <h1 className="my-5 text-xl">Title</h1>
             <div className="flex items-center">
                 <BaseIconButton
-                    icon={<BsCalendarCheck/>}
                     text="今日"
+                    icon={<BsCalendarCheck/>}
                     handleClick={setToday}
                 />
                 <BaseIconButton
-                    icon={<BsChevronLeft/>}
                     text="前日"
+                    icon={<BsChevronLeft/>}
                     handleClick={()=>setPreviousDay(date)}
                 />
                 <span>{convertDateToDisplayString(date, "yyyy年MM月dd日E曜日")}</span>
                 <BaseIconButton
-                    icon={<BsChevronRight/>}
                     text="翌日"
+                    icon={<BsChevronRight/>}
                     handleClick={() => setNextDay(date)}
                 />
                 <BaseIconButton
-                    icon={<BsCalendarWeek/>}
                     text="カレンダー"
+                    icon={<BsCalendarWeek/>}
                     handleClick={setToday}
                 />
             </div>

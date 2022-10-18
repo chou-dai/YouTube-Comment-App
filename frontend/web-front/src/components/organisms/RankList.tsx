@@ -12,7 +12,7 @@ const RankList: FC<Props> = memo(function rankList(props: Props) {
     const {items, handleOpenModal} = props;
 
     return (
-        <div className="w-[1920px]">
+        <div className="w-11/12 max-w-[1920px]">
             <span>
                 {convertDateToDisplayString(new Date(items[0].created_at), "yyyy/MM/dd HH:mm:ss 更新")}
             </span>
