@@ -24,6 +24,25 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface CommentData
+ */
+export interface CommentData {
+    /**
+     * 
+     * @type {string}
+     * @memberof CommentData
+     */
+    'word'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CommentData
+     */
+    'count'?: number;
+}
+/**
+ * 
+ * @export
  * @interface RankVideoData
  */
 export interface RankVideoData {
@@ -88,6 +107,12 @@ export interface VideoData {
      * @memberof VideoData
      */
     'thumbnail_url': string;
+    /**
+     * 
+     * @type {Array<CommentData>}
+     * @memberof VideoData
+     */
+    'comments'?: Array<CommentData>;
 }
 
 /**

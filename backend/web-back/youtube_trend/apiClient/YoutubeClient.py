@@ -18,12 +18,12 @@ class YoutubeApiClient():
         return response
 
     # 動画のコメントを取得
-    def fetch_comment_by_videoId(self, videoId):
+    def fetch_comments_by_videoId(self, videoId):
         try:
             response = self.youtube.commentThreads().list(
                 part='snippet',
                 videoId=videoId,
-                maxResults=100
+                maxResults=50
             ).execute()
         except:
             # コメントがオフになっている

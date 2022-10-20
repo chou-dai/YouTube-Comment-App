@@ -5,7 +5,7 @@ from .models import CommentData, DailyRankData, VideoData
 class CommentDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommentData
-        fields = ('video_id', 'comment')
+        fields = ('word', 'count')
 
 
 class VideoDataSerializer(serializers.ModelSerializer):

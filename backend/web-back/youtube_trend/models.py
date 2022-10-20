@@ -35,13 +35,20 @@ class DailyRankData(models.Model):
         return str(self.date)
  
 
-# コメントデータ
+# コメントの単語と数のデータ
 class CommentData(models.Model):
     video_id = models.ForeignKey(VideoData, related_name="comments", on_delete=models.CASCADE)
-    comment = models.TextField()
+    word = models.CharField(max_length=200, null=True)
+    count = models.IntegerField(default=0)
 
     class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["video_id", "word"],
+                name="video_word_unique"
+            ),
+        ]
         db_table = 'comment'
 
     def __str__(self):
-        return self.comment
+        return self.word

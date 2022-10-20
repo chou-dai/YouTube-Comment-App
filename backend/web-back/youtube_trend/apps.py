@@ -4,5 +4,5 @@ class YoutubeTrendConfig(AppConfig):
     name = 'youtube_trend'
 
     def ready(self):
-        from .youtube_service import start
+        from .scheduler import start
         start()
