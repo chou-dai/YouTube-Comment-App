@@ -63,7 +63,7 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
         id = item['id']
         # title
         title = snippet['title']
-        # tagger = MeCab.Tagger('-r /usr/lib/mecab/')
+        tagger = MeCab.Tagger('-r /usr/lib/mecab/')
         # try:
         #     parsed_txt = tagger.parse(title)
         #     print(parsed_txt)
