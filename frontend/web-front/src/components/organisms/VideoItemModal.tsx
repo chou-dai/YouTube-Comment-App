@@ -1,5 +1,7 @@
-import React, {FC, memo} from "react";
+import React, {FC, useEffect, useState} from "react";
+import WordCloud from "react-d3-cloud";
 import { RankVideoData } from "../../client";
+import { Datum } from "../../types/wordCloudDataType";
 
 type Props = {
     isOpened: boolean;
@@ -7,8 +9,19 @@ type Props = {
     handleClose: () => void;
 }
 
-const RankListItem: FC<Props> = memo(function rankListItem(props: Props) {
+const RankListItem: FC<Props> = (props: Props) => {
     const {isOpened, item, handleClose} = props;
+    const [wordCloudData, setWordCloudData] = useState<Datum[]>([]);
+
+    useEffect(()=>{
+        const data = item.video.comments?.map((comment): Datum => {
+            return {
+                text: comment.word as string,
+                value: comment.count as number
+            };
+        });
+        setWordCloudData(data as Datum[]);
+    },[]);
 
     return (
         <>
@@ -26,17 +39,22 @@ const RankListItem: FC<Props> = memo(function rankListItem(props: Props) {
                         <div>{item.date}</div>
                         <div>{item.video.title}</div>
                         <div>{item.video.channel_name}</div>
-                        <iframe
+                        {/* <iframe
                             width="560" height="315"
                             src={`https://www.youtube.com/embed/${item.video.id}?rel=0`}
                             className="bg-black"
-                        />
+                        /> */}
+
                     </div>
+                    <WordCloud
+                        data={wordCloudData}
+                        fontSize={(word) => Math.log2(word.value) * 40}
+                    />
                 </div>
             </div>
         </div>}
         </>
     );
-});
+};
 
 export default RankListItem;

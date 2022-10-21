@@ -1,4 +1,3 @@
-import { Button, IconButton } from "@material-ui/core";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RankVideoData } from "../../client";
@@ -6,8 +5,7 @@ import { useSelectDate } from "../../hooks";
 import { StoreType } from "../../redux/store";
 import { fetchRankVideoDataByDate, getRankVideoDataList } from "../../redux/videoDataResponse";
 import { convertDateToDisplayString, parseDate } from "../../utils/timeUtil";
-import { VideoItemModal } from "../molecules";
-import { RankList } from "../organisms";
+import { RankList, VideoItemModal } from "../organisms";
 import { BsCalendarCheck, BsCalendarWeek, BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { BaseIconButton } from "../atoms";
 
