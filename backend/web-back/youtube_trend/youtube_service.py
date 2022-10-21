@@ -189,8 +189,6 @@ def insert_database(video_data_list: list[YoutubeVideoData]):
                         print("Insert {} Error".format(video_data.title))
                         print("type:" + str(type(e)))
                         print("message:" + str(e))
-
-
             print("Insert {} Success".format(video_data.title))
         except Exception as e:
             print("Insert {} Error".format(video_data.title))
