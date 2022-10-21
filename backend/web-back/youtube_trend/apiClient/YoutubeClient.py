@@ -23,7 +23,7 @@ class YoutubeApiClient():
             response = self.youtube.commentThreads().list(
                 part='snippet',
                 videoId=videoId,
-                maxResults=50
+                maxResults=100
             ).execute()
         except:
             # コメントがオフになっている

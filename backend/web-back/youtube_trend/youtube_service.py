@@ -43,12 +43,14 @@ def to_video_data_list(response) -> list[YoutubeVideoData]:
             snippet = item['snippet']
             # videoId
             id = item['id']
-            # title
+            # title MySQL非対応の4バイト絵文字を取り除く
             title = snippet['title']
+            title = ''.join(filter(lambda c: len(c.encode('utf-16-be')) == 2, title))
             # image_url
             thumbnail_url = snippet['thumbnails']['high']['url']
-            # channel_title
+            # channel_title MySQL非対応の4バイト絵文字を取り除く
             channel_title = snippet['channelTitle']
+            channel_title = ''.join(filter(lambda c: len(c.encode('utf-16-be')) == 2, channel_title))
             # VideoDataClass生成
             video_data = YoutubeVideoData(id, title, thumbnail_url, channel_title)
             video_data_list.append(video_data)
@@ -143,11 +145,10 @@ def extract_word_list(word_pos_list):
     for word_pos in word_pos_list:
         if word_pos['品詞'] == '名詞' or word_pos['品詞'] == '動詞' or word_pos['品詞'] == '感動詞':
             word = word_pos['単語']
-            # 除外単語 TODO:関数化
+            # 除外単語 TODO:アンチwordリスト化
             if(word != "*" and word != "する" and word != "てる"):
                 word_list.append(word)
     return word_list
-
 
 
 """
@@ -186,7 +187,7 @@ def insert_database(video_data_list: list[YoutubeVideoData]):
                             video_id=video
                         )
                     except Exception as e:
-                        print("Insert {} Error".format(video_data.title))
+                        print("Insert Comments {} Error".format(video_data.title))
                         print("type:" + str(type(e)))
                         print("message:" + str(e))
             print("Insert {} Success".format(video_data.title))

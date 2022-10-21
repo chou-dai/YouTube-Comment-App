@@ -64,9 +64,8 @@ const Home: FC = () => {
                 items={rankVideoDataList}
                 handleOpenModal={handleOpenModal}
             />}
-            {modalItem &&
+            {modalItem && isOpenedModal &&
             <VideoItemModal
-                isOpened={isOpenedModal}
                 item={modalItem}
                 handleClose={handleCloseModal}
             />}
