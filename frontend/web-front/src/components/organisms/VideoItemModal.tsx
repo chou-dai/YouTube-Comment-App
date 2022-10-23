@@ -33,10 +33,10 @@ const RankListItem: FC<Props> = (props: Props) => {
                 <div className="relative w-[700px] h-full md:h-auto mx-auto">
                     <div className="relative rounded shadow bg-white p-6">
                         <div className="flex flex-col items-center">
-                            <div>{item.rank}</div>
-                            <div>{item.date}</div>
+                            {/* <div>{item.rank}</div> */}
+                            {/* <div>{item.date}</div> */}
                             <div>{item.video.title}</div>
-                            <div>{item.video.channel_name}</div>
+                            {/* <div>{item.video.channel_name}</div> */}
                             {/* <iframe
                                 width="560" height="315"
                                 src={`https://www.youtube.com/embed/${item.video.id}?rel=0`}
