@@ -4,6 +4,7 @@ from .models import CommentData, DailyRankData, VideoData
 from django.utils import timezone
 from django.utils.timezone import localtime
 from collections import Counter
+from .utils.anti_word import ANTI_WORD_LIST
 import MeCab
 
 """
@@ -16,6 +17,7 @@ import MeCab
 ===========================
 """
 def youtube_api_service():
+    print("Access YouTube API")
     youtube_client = YoutubeApiClient()
     # 急上昇取得
     response = youtube_client.fetch_youtube_trend()
@@ -26,7 +28,7 @@ def youtube_api_service():
     # コメントを形態素解析してYoutubeVideoDataのListに追加
     video_data_list = morphological_analysis_comment(video_data_list)
     # データベースにInsert
-    insert_database(video_data_list)
+    # insert_database(video_data_list)
 
 
 """
@@ -146,6 +148,8 @@ def extract_word_list(word_pos_list):
         if word_pos['品詞'] == '名詞' or word_pos['品詞'] == '動詞' or word_pos['品詞'] == '感動詞':
             word = word_pos['単語']
             # 除外単語 TODO:アンチwordリスト化
+            if word in ANTI_WORD_LIST:
+                print(word)
             if(word != "*" and word != "する" and word != "てる"):
                 word_list.append(word)
     return word_list
