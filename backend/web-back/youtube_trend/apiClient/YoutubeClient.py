@@ -11,7 +11,7 @@ class YoutubeApiClient():
                 part='snippet',
                 chart="mostPopular",
                 regionCode="jp",
-                maxResults=40
+                maxResults=1
             ).execute()
         except:
             response = False

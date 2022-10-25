@@ -1,3 +1,4 @@
+import string
 from .apiClient.YoutubeClient import YoutubeApiClient
 from .classes.VideoDataClass import YoutubeVideoData
 from .models import CommentData, DailyRankData, VideoData
@@ -70,13 +71,13 @@ def fetch_comments(
     ) -> list[YoutubeVideoData]:
     for video_data in video_data_list:
         # 動画のレコードが存在しない
-        if not(VideoData.objects.filter(id = video_data.id).exists()):
-            response = youtube_client.fetch_comments_by_videoId(video_data.id)
-            # responseがFalseでない
-            if response:
-                # コメント抽出
-                comment_str = extract_comment(response)
-                video_data.set_comment_str(comment_str)
+        # if not(VideoData.objects.filter(id = video_data.id).exists()):
+        response = youtube_client.fetch_comments_by_videoId(video_data.id)
+        # responseがFalseでない
+        if response:
+            # コメント抽出
+            comment_str = extract_comment(response)
+            video_data.set_comment_str(comment_str)
     return video_data_list
 
 
@@ -147,10 +148,8 @@ def extract_word_list(word_pos_list):
     for word_pos in word_pos_list:
         if word_pos['品詞'] == '名詞' or word_pos['品詞'] == '動詞' or word_pos['品詞'] == '感動詞':
             word = word_pos['単語']
-            # 除外単語 TODO:アンチwordリスト化
-            if word in ANTI_WORD_LIST:
-                print(word)
-            if(word != "*" and word != "する" and word != "てる"):
+            # アンチword + 数値 を除外する
+            if not(word in ANTI_WORD_LIST) and not(word.isdecimal()):
                 word_list.append(word)
     return word_list
 
