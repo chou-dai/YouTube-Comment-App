@@ -34,14 +34,10 @@ const Home: FC = () => {
     }, [date]);
     
     return (
-        <div className="flex flex-col items-center">
-            <h1 className="my-5 text-xl">Title</h1>
-            <div className="flex items-center">
-                <BaseIconButton
-                    text="今日"
-                    icon={<BsCalendarCheck/>}
-                    handleClick={setToday}
-                />
+        <div className="flex flex-col items-center py-6 px-3">
+            <h1 className="my-5 text-2xl font-bold">YouTube急上昇 & コメント解析WordCloud</h1>
+            <p>毎日0時にYouTubeの急上昇動画を取得し、各動画のコメント欄の出現頻度の高いワードを形態素解析を用いて算出して表示します。</p>
+            <div className="flex items-center mt-6">
                 <BaseIconButton
                     text="前日"
                     icon={<BsChevronLeft/>}
@@ -52,11 +48,6 @@ const Home: FC = () => {
                     text="翌日"
                     icon={<BsChevronRight/>}
                     handleClick={() => setNextDay(date)}
-                />
-                <BaseIconButton
-                    text="カレンダー"
-                    icon={<BsCalendarWeek/>}
-                    handleClick={setToday}
                 />
             </div>
             {rankVideoDataList.length !== 0 &&
