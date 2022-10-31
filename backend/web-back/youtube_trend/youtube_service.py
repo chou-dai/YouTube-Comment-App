@@ -29,7 +29,7 @@ def youtube_api_service():
     # コメントを形態素解析してYoutubeVideoDataのListに追加
     video_data_list = morphological_analysis_comment(video_data_list)
     # データベースにInsert
-    # insert_database(video_data_list)
+    insert_database(video_data_list)
 
 
 """

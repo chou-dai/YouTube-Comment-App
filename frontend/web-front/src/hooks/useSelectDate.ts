@@ -6,12 +6,9 @@ export const useSelectDate = () => {
     const setNextDay = useCallback((prevDate: Date) => {
         setDate(calcDate(prevDate, 1));
     }, []);
-    const setToday = useCallback(() => {
-        setDate(date);
-    }, []);
     const setPreviousDay = useCallback((prevDate: Date) => {
         setDate(calcDate(prevDate, -1));
     }, []);
 
-    return {date, setNextDay, setToday, setPreviousDay};
+    return {date, setNextDay, setPreviousDay};
 };

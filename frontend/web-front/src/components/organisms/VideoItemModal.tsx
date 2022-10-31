@@ -3,7 +3,7 @@ import WordCloud from "react-d3-cloud";
 import { RankVideoData } from "../../client";
 import { Datum } from "../../../types/wordCloudDataType";
 import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
-import { BsChevronDown } from "react-icons/bs";
+import { BsChevronDown, BsPersonCircle } from "react-icons/bs";
 
 type Props = {
     item: RankVideoData;
@@ -33,17 +33,11 @@ const RankListItem: FC<Props> = (props: Props) => {
                     onClick={handleClose}
                 />
                 <div className="relative w-[700px] h-full md:h-auto mx-auto">
-                    <div className="relative rounded shadow bg-white p-6">
+                    <div className="relative rounded shadow bg-white p-6 max-h-[90vh] overflow-scroll">
                         <div className="flex flex-col items-center">
                             {/* <div>{item.rank}</div> */}
                             {/* <div>{item.date}</div> */}
                             <div>{item.video.title}</div>
-                            {/* <div>{item.video.channel_name}</div> */}
-                            {/* <iframe
-                                width="560" height="315"
-                                src={`https://www.youtube.com/embed/${item.video.id}?rel=0`}
-                                className="bg-black"
-                            /> */}
                         </div>
                         <WordCloud
                             data={wordCloudData}
@@ -55,13 +49,18 @@ const RankListItem: FC<Props> = (props: Props) => {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                              <p>詳細</p>
+                              <p>動画詳細</p>
                             </AccordionSummary>
-                            <AccordionDetails>
+                            <AccordionDetails className="flex-col">
+                                <div>
+                                    <p>{item.date}</p>
+                                    <p>{item.rank}位</p>
+                                </div>
+                                <p>チャンネル名： {item.video.channel_name}</p>
                                 <iframe
-                                    width="560" height="315"
+                                    width="100%"
+                                    className="bg-black aspect-video"
                                     src={`https://www.youtube.com/embed/${item.video.id}?rel=0`}
-                                    className="bg-black"
                                 />
                             </AccordionDetails>
                         </Accordion>

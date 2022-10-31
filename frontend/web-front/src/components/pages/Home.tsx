@@ -14,7 +14,7 @@ const Home: FC = () => {
     const selector = useSelector((state: StoreType) => state);
     const rankVideoDataList = getRankVideoDataList(selector);
 
-    const {date, setNextDay, setToday, setPreviousDay} = useSelectDate();
+    const {date, setNextDay, setPreviousDay} = useSelectDate();
 
     const [modalItem, setModalItem] = useState(undefined as RankVideoData|undefined);
     const [isOpenedModal, setIsOpenedModal] = useState(false);
