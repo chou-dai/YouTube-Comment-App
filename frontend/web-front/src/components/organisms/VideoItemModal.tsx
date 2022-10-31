@@ -3,7 +3,8 @@ import WordCloud from "react-d3-cloud";
 import { RankVideoData } from "../../client";
 import { Datum } from "../../../types/wordCloudDataType";
 import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
-import { BsChevronDown, BsPersonCircle } from "react-icons/bs";
+import { BsChevronDown } from "react-icons/bs";
+import { convertDateToDisplayString } from "../../utils/timeUtil";
 
 type Props = {
     item: RankVideoData;
@@ -22,8 +23,15 @@ const RankListItem: FC<Props> = (props: Props) => {
             };
         });
         setWordCloudData(data as Datum[]);
+        if(data?.length == 0) setWordCloudData(
+            [{
+                text: "データが存在しません",
+                value: 2,
+                
+            }]
+        );
     }, []);
-
+    
     return (
         <>
             <div className="bg-black overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0
@@ -35,14 +43,16 @@ const RankListItem: FC<Props> = (props: Props) => {
                 <div className="relative w-[700px] h-full md:h-auto mx-auto">
                     <div className="relative rounded shadow bg-white p-6 max-h-[90vh] overflow-scroll">
                         <div className="flex flex-col items-center">
-                            {/* <div>{item.rank}</div> */}
-                            {/* <div>{item.date}</div> */}
-                            <div>{item.video.title}</div>
+                            <div className="text-xl mb-6">{item.video.title}</div>
                         </div>
-                        <WordCloud
-                            data={wordCloudData}
-                            fontSize={(word) => Math.log2(word.value) * 40}
-                        />
+                        <div>
+                            <WordCloud
+                                data={wordCloudData}
+                                fontSize={word => Math.log2(word.value) * 40}
+                                // rotate={word => (word.value % 90) - 45}
+                            /> 
+                        </div>
+
                         <Accordion>
                             <AccordionSummary
                                 expandIcon={<BsChevronDown />}
@@ -52,11 +62,14 @@ const RankListItem: FC<Props> = (props: Props) => {
                               <p>動画詳細</p>
                             </AccordionSummary>
                             <AccordionDetails className="flex-col">
-                                <div>
-                                    <p>{item.date}</p>
-                                    <p>{item.rank}位</p>
+                                <div className="flex text-lg mb-3">
+                                    <p>{convertDateToDisplayString(new Date(item.date), "yyyy/MM/dd")}</p>
+                                    <p className="ml-4">{item.rank}位</p>
                                 </div>
-                                <p>チャンネル名： {item.video.channel_name}</p>
+                                <div className="flex mb-3">
+                                    <p>チャンネル名： </p>
+                                    <p>{item.video.channel_name}</p>
+                                </div>
                                 <iframe
                                     width="100%"
                                     className="bg-black aspect-video"
