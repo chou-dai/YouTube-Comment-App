@@ -6,7 +6,7 @@ import { StoreType } from "../../redux/store";
 import { fetchRankVideoDataByDate, getRankVideoDataList } from "../../redux/videoDataResponse";
 import { convertDateToDisplayString, parseDate } from "../../utils/timeUtil";
 import { RankList, VideoItemModal } from "../organisms";
-import { BsCalendarCheck, BsCalendarWeek, BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { BaseIconButton } from "../atoms";
 
 const Home: FC = () => {

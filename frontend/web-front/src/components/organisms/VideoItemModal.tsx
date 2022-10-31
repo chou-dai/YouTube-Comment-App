@@ -2,6 +2,8 @@ import React, {FC, useEffect, useState} from "react";
 import WordCloud from "react-d3-cloud";
 import { RankVideoData } from "../../client";
 import { Datum } from "../../../types/wordCloudDataType";
+import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
+import { BsChevronDown } from "react-icons/bs";
 
 type Props = {
     item: RankVideoData;
@@ -47,6 +49,22 @@ const RankListItem: FC<Props> = (props: Props) => {
                             data={wordCloudData}
                             fontSize={(word) => Math.log2(word.value) * 40}
                         />
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<BsChevronDown />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                              <p>詳細</p>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <iframe
+                                    width="560" height="315"
+                                    src={`https://www.youtube.com/embed/${item.video.id}?rel=0`}
+                                    className="bg-black"
+                                />
+                            </AccordionDetails>
+                        </Accordion>
                     </div>
                 </div>
             </div>
