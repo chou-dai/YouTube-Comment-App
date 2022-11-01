@@ -23,15 +23,14 @@ const RankListItem: FC<Props> = (props: Props) => {
             };
         });
         setWordCloudData(data as Datum[]);
-        if(data?.length == 0) setWordCloudData(
-            [{
+        if(data?.length == 0) {
+            setWordCloudData([{
                 text: "データが存在しません",
                 value: 2,
-                
-            }]
-        );
+            }]);
+        }
     }, []);
-    
+
     return (
         <>
             <div className="bg-black overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0
@@ -49,7 +48,6 @@ const RankListItem: FC<Props> = (props: Props) => {
                             <WordCloud
                                 data={wordCloudData}
                                 fontSize={word => Math.log2(word.value) * 40}
-                                // rotate={word => (word.value % 90) - 45}
                             /> 
                         </div>
 
