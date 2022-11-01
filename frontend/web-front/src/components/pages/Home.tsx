@@ -34,7 +34,7 @@ const Home: FC = () => {
     }, [date]);
     
     return (
-        <div className="flex flex-col items-center py-6 px-3">
+        <div className="flex flex-col items-center pt-6 pb-16 px-3">
             <h1 className="my-5 text-2xl font-bold">YouTube急上昇 & コメント解析WordCloud</h1>
             <p>毎日0時にYouTubeの急上昇動画を取得し、各動画コメント欄における出現頻度の高いワードを形態素解析を用いて算出して表示します。</p>
             <div className="flex items-center mt-6">
