@@ -1,11 +1,11 @@
-.env
-mysql_volume/*
+# .env
+# mysql_volume/*
 
 .cache/
-default.dev.conf
+# default.dev.conf
 
-settings.py
-local_settings.py
+# settings.py
+# local_settings.py
 swagger.json
 swagger copy.json
 openapitools.json
