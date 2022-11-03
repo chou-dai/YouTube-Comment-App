@@ -145,5 +145,5 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost',
-    'http://localhost:18512/'
+    # 'http://localhost:18512/'
 )
