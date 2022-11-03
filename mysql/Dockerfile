@@ -1,5 +1,5 @@
 FROM mysql:8.0.26
 
-RUN echo "USE mysql;" > /docker-entrypoint-initdb.d/timezones.sql && mysql_tzinfo_to_sql /usr/share/zoneinfo >> /docker-entrypoint-initdb.d/timezones.sql
+RUN echo "USE mysql;" > GOARCH=amd64 GOOS=linux /docker-entrypoint-initdb.d/timezones.sql && mysql_tzinfo_to_sql /usr/share/zoneinfo >> /docker-entrypoint-initdb.d/timezones.sql
 
 COPY ./my.cnf /etc/mysql/conf.d/my.cnf
