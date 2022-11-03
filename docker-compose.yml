@@ -46,7 +46,7 @@ services:
       TZ: 'Asia/Tokyo'
     volumes:
       - ./mysql_volume:/var/lib/mysql
-      # - ./sql:/docker-entrypoint-initdb.d
+      - ./sql:/docker-entrypoint-initdb.d
     networks:
       - backend_network
 
