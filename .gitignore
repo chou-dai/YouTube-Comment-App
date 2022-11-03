@@ -1,5 +1,5 @@
 # .env
-# mysql_volume/*
+mysql_volume/*
 
 .cache/
 # default.dev.conf
