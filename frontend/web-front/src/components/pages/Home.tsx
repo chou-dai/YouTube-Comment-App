@@ -32,11 +32,6 @@ const Home: FC = () => {
     useEffect(() => {
         dispatch(fetchRankVideoDataByDate(parseDate(date)));
     }, [date]);
-
-    useEffect(() => {
-        console.log(rankVideoDataList);
-        
-    },[rankVideoDataList]);
     
     return (
         <div className="flex flex-col items-center pt-6 pb-16 px-3">

@@ -4,7 +4,7 @@ import {
 import { Configuration } from "./configuration";
 
 // dev環境
-const basePath = "http://133.18.238.196/";
+const basePath = "http://133.18.238.196:8080";
 
 const option = {};
 
