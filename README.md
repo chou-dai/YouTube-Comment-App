@@ -1,4 +1,4 @@
-# YouTube Trend  AND  Video Comments WordCloud
+# YouTube Trend  AND  Comments WordCloud
 
 
 ### 概要
