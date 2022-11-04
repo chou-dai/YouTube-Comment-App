@@ -18,7 +18,9 @@ import MeCab
 ===========================
 """
 def youtube_api_service():
-    print("Access YouTube API")
+    now = localtime(timezone.now())
+    now.strftime('%Y-%m-%d')
+    print("Access YouTube API {}".format(now))
     youtube_client = YoutubeApiClient()
     # 急上昇取得
     response = youtube_client.fetch_youtube_trend()

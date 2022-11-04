@@ -7,7 +7,7 @@ services:
     build: ./backend/web-back/.
     volumes:
       - ./backend/web-back:/code/
-      - static_volume:/code/staticfiles # <-- bind the static volume
+      - static_volume:/code/staticfile
     stdin_open: true
     tty: true
     command: gunicorn --bind :8000 config.wsgi:application
@@ -24,7 +24,7 @@ services:
       context: ./backend/nginx/.
       dockerfile: Dockerfile.dev
     volumes:
-      - static_volume:/code/staticfiles # <-- bind the static volume
+      - static_volume:/code/staticfiles
     ports:
       - "8080:80"
     depends_on:
