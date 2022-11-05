@@ -57,8 +57,8 @@ services:
     ports:
       - 3000:3000
     working_dir: /home/app/frontend
-    command: [bash, -c, npm upgrade --no-progress --network-timeout 1000000 && npm start]
-    # command: [bash, -c, npm upgrade --no-progress --network-timeout 1000000 && npx serve -s build]
+    # command: [bash, -c, npm upgrade --no-progress --network-timeout 1000000 && npm start]
+    command: [bash, -c, npm upgrade --no-progress --network-timeout 1000000 && npx serve -s build]
     networks:
       - frontend_network
   frontend-server:
