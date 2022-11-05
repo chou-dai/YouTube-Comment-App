@@ -34,8 +34,8 @@ services:
   db:
     build: ./mysql
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    # platform: linux/x86_64
-    platform: linux/amd64
+    platform: linux/x86_64
+    # platform: linux/amd64
     ports:
       - "3306:3306"
     environment:
