@@ -2,9 +2,21 @@ import { Dispatch } from "redux";
 import { videoDataApi } from "../../client/clientWrapper";
 import { fetchVideoListAction } from "./actions";
 
-export const fetchRankVideoDataByDate = (date: string) => {
+export const fetchRankVideoDataByDate = (date: string,
+                                        setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+                                        setIsError: React.Dispatch<React.SetStateAction<boolean>>) => {
     return async(dispatch: Dispatch) => {
-        const response = await videoDataApi.getDailyRankVideoDataList(date);
-        dispatch(fetchVideoListAction(response.data));
+        setIsError(false);
+        setIsLoading(true);
+        videoDataApi.getDailyRankVideoDataList(date)
+            .then((response) => {
+                dispatch(fetchVideoListAction(response.data));
+            })
+            .catch(() => {
+                setIsError(true);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     };
 };

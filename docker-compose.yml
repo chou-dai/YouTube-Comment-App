@@ -34,8 +34,8 @@ services:
   db:
     build: ./mysql
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    platform: linux/x86_64
-    # platform: linux/amd64
+    # platform: linux/x86_64
+    platform: linux/amd64
     ports:
       - "3306:3306"
     environment:
@@ -57,7 +57,8 @@ services:
     ports:
       - 3000:3000
     working_dir: /home/app/frontend
-    command: [bash, -c, npm upgrade --no-progress --network-timeout 1000000 && npx serve -s build]
+    command: [bash, -c, npm upgrade --no-progress --network-timeout 1000000 && npm start]
+    # command: [bash, -c, npm upgrade --no-progress --network-timeout 1000000 && npx serve -s build]
     networks:
       - frontend_network
   frontend-server:

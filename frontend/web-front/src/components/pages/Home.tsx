@@ -8,6 +8,7 @@ import { convertDateToDisplayString, parseDate } from "../../utils/timeUtil";
 import { RankList, VideoItemModal } from "../organisms";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { BaseIconButton } from "../atoms";
+import { CircularProgress } from "@material-ui/core";
 
 const Home: FC = () => {
     const dispatch = useDispatch();
@@ -18,6 +19,9 @@ const Home: FC = () => {
 
     const [modalItem, setModalItem] = useState(undefined as RankVideoData|undefined);
     const [isOpenedModal, setIsOpenedModal] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     // モーダルを開く
     const handleOpenModal = (item: RankVideoData) => {
@@ -30,13 +34,13 @@ const Home: FC = () => {
     };
     // date変更時：ランキングデータを取得
     useEffect(() => {
-        dispatch(fetchRankVideoDataByDate(parseDate(date)));
+        dispatch(fetchRankVideoDataByDate(parseDate(date), setIsLoading, setIsError));
     }, [date]);
     
     return (
         <div className="flex flex-col items-center pt-6 pb-16 px-3">
             <h1 className="my-5 text-2xl font-bold">YouTube急上昇 & コメント解析WordCloud</h1>
-            <p>毎日0時にYouTubeの急上昇動画を取得し、各動画コメント欄における出現頻度の高いワードを形態素解析を用いて算出して表示します。</p>
+            <p>毎日0時にYouTubeの急上昇動画を取得し、各動画コメント欄における出現頻度の高いワードを形態素解析とWordCloudを用いて可視化します。</p>
             <div className="flex items-center mt-6">
                 <BaseIconButton
                     text="前日"
@@ -50,11 +54,19 @@ const Home: FC = () => {
                     handleClick={() => setNextDay(date)}
                 />
             </div>
-            {rankVideoDataList.length !== 0 &&
-            <RankList
-                items={rankVideoDataList}
-                handleOpenModal={handleOpenModal}
-            />}
+            {isLoading && <CircularProgress className="mt-10"/>}
+            {isError && <p className="mt-10 text-red-800">データ取得に失敗しました</p>}
+            {!isLoading && !isError && (
+                rankVideoDataList.length === 0 ?
+                (
+                    <p className="mt-10">データが存在しません</p>
+                ):(
+                    <RankList
+                        items={rankVideoDataList}
+                        handleOpenModal={handleOpenModal}
+                    />
+                )
+            )}
             {modalItem && isOpenedModal &&
             <VideoItemModal
                 item={modalItem}

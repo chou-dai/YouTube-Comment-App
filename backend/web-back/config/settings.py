@@ -144,6 +144,7 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_WHITELIST = (
+    'http://localhost',
     'http://133.18.238.196/',
     # 'http://localhost:18512/'
 )
