@@ -39,8 +39,8 @@ const RankListItem: FC<Props> = (props: Props) => {
                 <div className="absolute w-full h-full cursor-pointer"
                     onClick={handleClose}
                 />
-                <div className="relative w-[86%] md:w-[700px] h-auto mx-auto">
-                    <div className="relative rounded shadow bg-white p-6 max-h-[70vh] md:max-h-[90vh] overflow-scroll">
+                <div className="relative w-[90%] md:w-[700px] h-auto mx-auto">
+                    <div className="relative rounded shadow bg-white p-6 max-h-[75vh] md:max-h-[90vh] overflow-scroll">
                         <div className="flex flex-col items-center">
                             <div className="mb-2 sm:mb-6 text-sm sm:text-xl">{item.video.title}</div>
                         </div>

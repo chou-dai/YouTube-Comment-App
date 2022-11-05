@@ -40,7 +40,7 @@ const Home: FC = () => {
     return (
         <div className="flex flex-col items-center pt-6 pb-16 px-3">
             <h1 className="my-5 text-base sm:text-2xl font-bold">YouTube急上昇 & コメント解析WordCloud</h1>
-            <p className="text-xs sm:text-base">
+            <p className="text-sm sm:text-base">
                 毎日0時にYouTubeの急上昇動画を取得し、各動画コメント欄における出現頻度の高いワードを形態素解析とWordCloudを用いて可視化します。
             </p>
             <div className="flex items-center my-2 sm:mt-6">
