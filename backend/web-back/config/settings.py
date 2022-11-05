@@ -19,19 +19,30 @@ PROJECT_DIR = os.path.basename(BASE_DIR)
 
 # .envの読み込み
 load_dotenv(os.path.join(BASE_DIR, '.env'))
-
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '73&q7!h=*!33=l#4(&ghjf1j7by1hnnas%=p-8lkt(%^)vfrv2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+MYSQL_DATABASE = os.environ['MYSQL_DATABASE']
+MYSQL_USER = os.environ['MYSQL_USER']
+MYSQL_PASSWORD = os.environ['MYSQL_PASSWORD']
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': MYSQL_DATABASE,
+        'USER': MYSQL_USER,
+        'PASSWORD': MYSQL_PASSWORD,
+        'HOST': 'db',
+        'PORT': '3306',
+    }
+}
 
 # Application definition
 
@@ -47,7 +58,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
-    # Local
     'youtube_trend.apps.YoutubeTrendConfig',
 ]
 
@@ -143,8 +153,9 @@ REST_FRAMEWORK = {
     ]
 }
 
+CORS_ORIGIN_URL = os.environ['CORS_ORIGIN_URL']
+print(CORS_ORIGIN_URL)
 CORS_ORIGIN_WHITELIST = (
-    # 'http://localhost',
-    'http://133.18.238.196/',
-    # 'http://localhost:18512/'
+    CORS_ORIGIN_URL,
+    'http://133.18.238.196/'
 )
