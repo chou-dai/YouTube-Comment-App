@@ -39,27 +39,35 @@ const Home: FC = () => {
     
     return (
         <div className="flex flex-col items-center pt-6 pb-16 px-3">
-            <h1 className="my-5 text-2xl font-bold">YouTube急上昇 & コメント解析WordCloud</h1>
-            <p>毎日0時にYouTubeの急上昇動画を取得し、各動画コメント欄における出現頻度の高いワードを形態素解析とWordCloudを用いて可視化します。</p>
-            <div className="flex items-center mt-6">
+            <h1 className="my-5 text-base sm:text-2xl font-bold">YouTube急上昇 & コメント解析WordCloud</h1>
+            <p className="text-xs sm:text-base">
+                毎日0時にYouTubeの急上昇動画を取得し、各動画コメント欄における出現頻度の高いワードを形態素解析とWordCloudを用いて可視化します。
+            </p>
+            <div className="flex items-center my-2 sm:mt-6">
                 <BaseIconButton
                     text="前日"
                     icon={<BsChevronLeft/>}
+                    className="w-11 h-11 sm:w-12 sm:h-12"
                     handleClick={()=>setPreviousDay(date)}
                 />
-                <span>{convertDateToDisplayString(date, "yyyy年MM月dd日E曜日")}</span>
+                <span className="text-sm sm:text-base">
+                    {convertDateToDisplayString(date, "yyyy年MM月dd日E曜日")}
+                </span>
                 <BaseIconButton
                     text="翌日"
                     icon={<BsChevronRight/>}
+                    className="w-11 h-11 sm:w-12 sm:h-12"
                     handleClick={() => setNextDay(date)}
                 />
             </div>
-            {isLoading && <CircularProgress className="mt-10"/>}
-            {isError && <p className="mt-10 text-red-800">データ取得に失敗しました</p>}
+            {isLoading && <CircularProgress className="mt-14"/>}
+            {isError && <p className="mt-14 text-red-800">データ取得に失敗しました</p>}
             {!isLoading && !isError && (
                 rankVideoDataList.length === 0 ?
                 (
-                    <p className="mt-10">データが存在しません</p>
+                    <p className="mt-14 text-sm sm:text-base">
+                        データが存在しません
+                    </p>
                 ):(
                     <RankList
                         items={rankVideoDataList}

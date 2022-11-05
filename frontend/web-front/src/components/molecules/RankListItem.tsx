@@ -27,7 +27,7 @@ const RankListItem: FC<Props> = memo(function rankListItem(props: Props) {
                     >
                         {item.rank}
                     </span>
-                    <h1 className=" text-xl">
+                    <h1 className="text-sm sm:text-lg">
                         {item.video.title}
                     </h1>
                 </div>
