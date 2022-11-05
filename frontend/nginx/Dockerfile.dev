@@ -9,4 +9,3 @@ CMD ["/wait.sh", "web-front:3000", "--", "nginx", "-g", "daemon off;"]
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY default.dev.conf /etc/nginx/conf.d
-ADD ssl /etc/nginx/ssl
