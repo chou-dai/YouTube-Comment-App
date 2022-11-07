@@ -22,7 +22,7 @@ services:
     container_name: nginx_back
     build:
       context: ./backend/nginx/.
-      dockerfile: Dockerfile.dev
+      dockerfile: ${DOCKERFILE}
     volumes:
       - static_volume:/code/staticfiles
     ports:
@@ -59,17 +59,32 @@ services:
     command: [bash, -c, $FRONT_COMMAND]
     networks:
       - frontend_network
+
+  nginx-proxy:
+    container_name: nginx_proxy
+    build:
+      context: ./nginx/.
+      dockerfile: ${DOCKERFILE}
+    ports:
+      - "80:80"
+    depends_on:
+      - web-back
+      - web-front
+    networks:
+      - frontend_network
+      - backend_network
   frontend-server:
     container_name: nginx_frontend
     build:
       context: ./frontend/nginx/.
-      dockerfile: Dockerfile.dev
+      dockerfile: ${DOCKERFILE}
     ports:
-      - "80:80"
+      - "81:80"
     depends_on:
       - web-front
     networks:
-      - frontend_network  
+      - frontend_network
+
 
 networks:
   backend_network:
