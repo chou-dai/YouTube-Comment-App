@@ -3,6 +3,8 @@ mysql_volume/*
 
 .cache/
 # default.dev.conf
+*.drawio
+architecture.png
 
 swagger.json
 swagger copy.json
