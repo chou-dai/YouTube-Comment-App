@@ -9,7 +9,8 @@ YouTubeの急上昇動画のコメントを形態素解析して、コメント�
 ### 技術スタック
 * フロントエンド : React（Typescript）, Redux
 * バックエンド : Django（Python）, MySQL
-* その他 : Docker, Nginx, OpenAPI, YouTubeAPI, Mecab
+* Webサーバー : Nginx
+* その他 : Docker, OpenAPI, YouTubeAPI, Mecab
 
 
 ### アーキテクチャ
