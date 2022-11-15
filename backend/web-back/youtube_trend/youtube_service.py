@@ -73,13 +73,13 @@ def fetch_comments(
     ) -> list[YoutubeVideoData]:
     for video_data in video_data_list:
         # 動画のレコードが存在しない
-        # if not(VideoData.objects.filter(id = video_data.id).exists()):
-        response = youtube_client.fetch_comments_by_videoId(video_data.id)
-        # responseがFalseでない
-        if response:
-            # コメント抽出
-            comment_str = extract_comment(response)
-            video_data.set_comment_str(comment_str)
+        if not(VideoData.objects.filter(id = video_data.id).exists()):
+            response = youtube_client.fetch_comments_by_videoId(video_data.id)
+            # responseがFalseでない
+            if response:
+                # コメント抽出
+                comment_str = extract_comment(response)
+                video_data.set_comment_str(comment_str)
     return video_data_list
 
 
