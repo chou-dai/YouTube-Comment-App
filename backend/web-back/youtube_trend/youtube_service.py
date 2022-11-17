@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.utils.timezone import localtime
 from collections import Counter
 from .utils.anti_word import ANTI_WORD_LIST
+from django.db import close_old_connections
 import MeCab
 
 """
@@ -31,6 +32,7 @@ def youtube_api_service():
     # コメントを形態素解析してYoutubeVideoDataのListに追加
     video_data_list = morphological_analysis_comment(video_data_list)
     # データベースにInsert
+    close_old_connections()
     insert_database(video_data_list)
 
 
