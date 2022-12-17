@@ -21,9 +21,9 @@ YouTubeの急上昇動画のコメントを形態素解析して、コメント�
 ## 技術スタック
 | 分野 | 使用技術 |
 | ---- | ---- |
-| フロントエンド | React(Typescript), Redux |
+| フロントエンド | React(Typescript), Redux, tailwindcss, Material-UI |
 | バックエンド | Django REST Framework, MySQL |
-| Webサーバー | Nginx
+| Webサーバー | Nginx |
 | その他 | Docker, OpenAPI, YouTubeAPI, Mecab |
 
 ## アーキテクチャ
