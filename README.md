@@ -1,7 +1,8 @@
 # YouTube Trend  AND  Comments WordCloud
 
 ## 概要
-YouTubeの急上昇動画のコメントを形態素解析して、コメントに含まれる使用単語の割合を出力するアプリケーション
+YouTubeの急上昇動画のコメントを形態素解析して、コメントに含まれる使用単語の割合を出力するアプリケーション<br>
+http://chou-dai-wordcloud.com/
 <table>
   <tr>
     <td valign="top"><img width="100%" src="https://user-images.githubusercontent.com/89395132/203288082-d6f4f51b-08e7-4602-b13b-8741428ffbd5.png"></td>
