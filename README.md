@@ -2,7 +2,6 @@
 
 ## 概要
 YouTubeの急上昇動画のコメントを形態素解析して、コメントに含まれる使用単語の割合を出力するアプリケーション<br>
-http://chou-dai-wordcloud.com
 
 <table>
   <tr>
